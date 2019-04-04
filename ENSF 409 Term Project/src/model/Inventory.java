@@ -83,7 +83,7 @@ public class Inventory {
 	 * @param id
 	 * @return Item
 	 */
-	public Item searchID(int id) {
+	public Item search(int id) {
 		for(int i = 0; i < itemList.size(); i++) {
 			if(itemList.get(i).getID() == id)
 				return itemList.get(i);
@@ -96,7 +96,7 @@ public class Inventory {
 	 * @param name
 	 * @return Item
 	 */
-	public Item searchName(String name) {
+	public Item search(String name) {
 		for(int i = 0; i < itemList.size(); i++) {
 			if(itemList.get(i).getName().equals(name))
 				return itemList.get(i);
@@ -116,6 +116,23 @@ public class Inventory {
 		}
 		
 		return 0;
+	}
+	
+	/**
+	 * Used to lower the quantity of an item.
+	 * @param name
+	 * @param ammount
+	 */
+	public void lowerQuantity(String name, int ammount) {
+		//TODO Error checking for going too low
+		for(int i = 0; i < itemList.size(); i++) {
+			if(itemList.get(i).getName().equals(name)) {
+				itemList.get(i).setQuantity(ammount - itemList.get(i).getQuantity());
+			}
+				
+		}
+		
+
 	}
 	
 	/**
