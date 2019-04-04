@@ -22,7 +22,7 @@ public class CustomerOrder extends Order{
 	
 	String checkout() {
 		for(int i = 0; i < order.size(); i++) {
-			((CustomerOrderLine) order.get(i)).checkOut();;
+			((CustomerOrderLine) order.get(i)).checkOut();
 		}
 		return this.toString();
 		

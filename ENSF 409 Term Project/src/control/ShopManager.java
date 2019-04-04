@@ -52,6 +52,19 @@ public class ShopManager extends Manager {
 				addNewItem(id,name,quantity,price,supplierID);
 				
 			}
+			else if(command[0].equals("CREATE_NEWSUPPLIER")) {
+				int id = Integer.parseInt(parameters[0]);
+				addNewSupplier(id, parameters[1], parameters[2], parameters[3]);
+			}else if(command[0].equals("CHANGE_PRICE")) {
+				int id = Integer.parseInt(parameters[0]);
+				double change = Double.parseDouble(parameters[1]);
+				changePrice(id, change);
+			}else if(command[0].equals("SEARCH")) {
+				int id = Integer.parseInt(parameters[0]);
+				sendString(search(id).toString());
+			}else if(command[0].equals("SEE_ORDER")) {
+				sendString(order.toString());
+			}
 		}
 		
 	}

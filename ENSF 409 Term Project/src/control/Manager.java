@@ -43,4 +43,6 @@ abstract class Manager {
 		socketOut.println(message);
 		socketOut.flush();
 	}
+	
+
 }
