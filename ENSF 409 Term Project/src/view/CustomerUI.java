@@ -14,6 +14,7 @@ public class CustomerUI extends JFrame{
 	private CustomerClient customerClient;
 	
 	public CustomerUI(String serverName, int portNumber) {
+		System.out.println("Test Push");
 		customerClient = new CustomerClient(serverName, portNumber);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

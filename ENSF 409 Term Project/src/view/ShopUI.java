@@ -11,6 +11,7 @@ public class ShopUI extends JFrame{
 	private ManagerClient managerClient;
 	
 	public ShopUI(String serverName, int portNumber) {
+		System.out.println("Test Push");
 		managerClient = new ManagerClient(serverName, portNumber);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
