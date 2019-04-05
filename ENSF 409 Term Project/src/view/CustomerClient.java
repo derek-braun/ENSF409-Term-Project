@@ -6,7 +6,6 @@ public class CustomerClient extends ShopClient{
 		super(serverName, portNumber);
 	}
 	
-	//test
 	protected void requestPlaceOrder(String id) {
 		
 	}

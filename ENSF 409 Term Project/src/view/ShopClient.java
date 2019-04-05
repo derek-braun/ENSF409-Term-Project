@@ -26,6 +26,7 @@ public class ShopClient {
 	}
 	
 	protected void requestSearch(String name) {
-		
+		socketOut.println("SEARCH" + "\n" + name);  //this string gets parsed in Manager to call the correct
+		                                            //method
 	}
 }
