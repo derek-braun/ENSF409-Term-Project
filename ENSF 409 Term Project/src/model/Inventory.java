@@ -155,7 +155,7 @@ public class Inventory {
 	public String toString() {
 		String s = "";
 		for(int i = 0; i < itemList.size(); i++) {
-			s += itemList.get(i).toString();
+			s += itemList.get(i).toString() + " ";
 		}
 		return s;
 	}
