@@ -7,6 +7,7 @@ public class CustomerClient extends ShopClient{
 	}
 	
 	protected void requestPlaceOrder(String id) {
-		
+		socketOut.write("CUSTOMER_ORDER\n");
+		socketOut.write(id);
 	}
 }
