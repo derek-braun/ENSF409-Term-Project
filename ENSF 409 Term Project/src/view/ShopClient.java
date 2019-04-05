@@ -33,10 +33,8 @@ public class ShopClient {
 	}
 	
 	protected void requestSearch(String name) {
-		socketOut.println("SEARCH" + "\n" + name);  //this string gets parsed in Manager to call the correct
-		                                            //method
-		socketOut.write("SEARCH_ITEM\n");
-		socketOut.write(name);
+		socketOut.write("SEARCH_ITEM " + name + "\n");
+		socketOut.flush();
 	}
 	
 	protected String passResult(String result) {

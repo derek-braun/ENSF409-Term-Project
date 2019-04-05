@@ -8,11 +8,12 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class ShopUI extends JFrame{
-	private ManagerClient managerClient;
 	
-	public ShopUI(String serverName, int portNumber) {
+	protected JButton viewOrder;
+	protected JButton searchButton;
+	
+	public ShopUI() {
 		System.out.println("Test Push");
-		managerClient = new ManagerClient(serverName, portNumber);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 300);
@@ -32,7 +33,7 @@ public class ShopUI extends JFrame{
 		panel.setBackground(Color.DARK_GRAY);
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
-		JButton searchButton = new JButton("Search");
+		searchButton = new JButton("Search");
 		searchButton.setBackground(Color.WHITE);
 		panel.add(searchButton);
 		
@@ -52,7 +53,7 @@ public class ShopUI extends JFrame{
 		changePrice.setBackground(Color.WHITE);
 		panel.add(changePrice);
 		
-		JButton viewOrder = new JButton("View");
+		viewOrder = new JButton("View");
 		viewOrder.setBackground(Color.WHITE);
 		panel.add(viewOrder);
 		
@@ -61,34 +62,11 @@ public class ShopUI extends JFrame{
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		scrollPane.setViewportView(list);
-		managerClient.shopSession();
-	}
-	
-	private void searchItem(String name) {
-		managerClient.requestSearch(name);
-	}
-	
-	private void placeOrder(String id) {
-		managerClient.requestPlaceOrder(id);
-	}
-	
-	private void createNewSuppler(String id, String name, String address, String contact) {
-		managerClient.createNewSupplier(id, name, address, contact);
-	}
-	
-	private void createNewItem(String id, String name, String quantity, String price, String supplier) {
-		managerClient.createNewItem(id, name, quantity, price, supplier);
-	}
-	
-	private void changeItemPrice(String price) {
-		managerClient.changeItemPrice(price);
-	}
-	
-	private void viewOrder() {
 		
+		setVisible(true);
 	}
 	
-	private void addListener(ActionListener al, Button b) {
+	public void addListener(ActionListener al, JButton b) {
 		b.addActionListener(al);
 	}
 }
