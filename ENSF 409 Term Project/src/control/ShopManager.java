@@ -43,7 +43,7 @@ public class ShopManager extends Manager {
 			//CHEESE
 			System.out.println(input);
 			String[] command = input.split(" ");
-			//System.out.println("Command: " + command[0]);
+			System.out.println("Command: " + command[0]);
 			if(command[0].equals("CREATE_ITEM")) {
 				int id = Integer.parseInt(command[1]); 
 				String name = command[2];
@@ -69,6 +69,10 @@ public class ShopManager extends Manager {
 				//System.out.println("Exiting search");
 			}else if(command[0].equals("MANAGE_ORDER")) {
 				sendString(order.toString());
+			}else if(command[0].equals("PRINT_INVENTORY")) {
+				String s = inventory.toString();
+				System.out.println(s);
+				sendString(s);
 			}
 		}
 		
