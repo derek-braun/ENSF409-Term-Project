@@ -61,7 +61,7 @@ public class ShopUI extends JFrame{
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		scrollPane.setViewportView(list);
-		
+		managerClient.shopSession();
 	}
 	
 	private void searchItem(String name) {
@@ -72,16 +72,16 @@ public class ShopUI extends JFrame{
 		managerClient.requestPlaceOrder(id);
 	}
 	
-	private void createNewSuppler() {
-		managerClient.createNewSupplier();
+	private void createNewSuppler(String id, String name, String address, String contact) {
+		managerClient.createNewSupplier(id, name, address, contact);
 	}
 	
-	private void createNewItem() {
-		managerClient.createNewItem();
+	private void createNewItem(String id, String name, String quantity, String price, String supplier) {
+		managerClient.createNewItem(id, name, quantity, price, supplier);
 	}
 	
-	private void changeItemPrice() {
-		managerClient.changeItemPrice();
+	private void changeItemPrice(String price) {
+		managerClient.changeItemPrice(price);
 	}
 	
 	private void viewOrder() {
