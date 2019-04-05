@@ -11,6 +11,10 @@ public class ShopUI extends JFrame{
 	
 	protected JButton listAllButton;
 	protected JButton searchButton;
+	protected JButton addItem;
+	protected JButton addSupplier;
+	protected JButton changePrice;
+	protected JList list;
 	protected DefaultListModel itemList;
 	
 	public ShopUI() {
@@ -43,15 +47,15 @@ public class ShopUI extends JFrame{
 		order.setBackground(Color.WHITE);
 		panel.add(order);
 		
-		JButton addItem = new JButton("Add Item");
+		addItem = new JButton("Add Item");
 		addItem.setBackground(Color.WHITE);
 		panel.add(addItem);
 		
-		JButton addSupplier = new JButton("Add Supplier");
+		addSupplier = new JButton("Add Supplier");
 		addSupplier.setBackground(Color.WHITE);
 		panel.add(addSupplier);
 		
-		JButton changePrice = new JButton("Change Price");
+		changePrice = new JButton("Change Price");
 		changePrice.setBackground(Color.WHITE);
 		panel.add(changePrice);
 		
@@ -59,7 +63,7 @@ public class ShopUI extends JFrame{
 		listAllButton.setBackground(Color.WHITE);
 		panel.add(listAllButton);
 		
-		JList list = new JList(itemList);
+		list = new JList(itemList);
 		JScrollPane scrollPane = new JScrollPane(list);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		

@@ -62,8 +62,14 @@ public class ShopManager extends Manager {
 				changePrice(id, change);
 			}else if(command[0].equals("SEARCH_ITEM")) {
 				//System.out.println("Entering search");
-				int id = Integer.parseInt(command[1]);
-				String s = search(id).toString();
+				String s;
+				try {
+					int id = Integer.parseInt(command[1]);
+					s = search(id).toString();
+				}catch(NumberFormatException e) {
+					String name = command[1];
+					s = search(name).toString();
+				}
 				System.out.println(s);
 				sendString(s);
 				//System.out.println("Exiting search");

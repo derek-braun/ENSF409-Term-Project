@@ -18,13 +18,14 @@ import java.awt.Component;
 import javax.swing.Box;
 
 public class SearchWindow extends JFrame{
-	private JTextField textField_1;
+	private JTextField idField;
 	private ShopClient client;
+	private JTextField nameField;
 	
 	public SearchWindow(ShopClient client) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 150);
+		setBounds(100, 100, 500, 184);
 		setResizable(false);
 		
 		JPanel panel = new JPanel();
@@ -34,19 +35,29 @@ public class SearchWindow extends JFrame{
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
 		
-		JLabel lblId = new JLabel("Item Name");
+		JLabel lblId = new JLabel("Item ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(75, 30, 105, 14);
+		lblId.setBounds(75, 62, 105, 14);
 		panel_1.add(lblId);
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		horizontalGlue.setBounds(245, 93, 1, 1);
 		panel_1.add(horizontalGlue);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(239, 30, 184, 20);
-		panel_1.add(textField_1);
+		idField = new JTextField();
+		idField.setColumns(10);
+		idField.setBounds(245, 62, 184, 20);
+		panel_1.add(idField);
+		
+		JLabel lblItemName = new JLabel("Item Name:");
+		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblItemName.setBounds(75, 28, 105, 14);
+		panel_1.add(lblItemName);
+		
+		nameField = new JTextField();
+		nameField.setColumns(10);
+		nameField.setBounds(245, 28, 184, 20);
+		panel_1.add(nameField);
 		
 		JButton btnCancel = new JButton("Cancel");
 		panel.add(btnCancel);
@@ -60,8 +71,16 @@ public class SearchWindow extends JFrame{
 		panel.add(btnDone);
 		btnDone.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
-	            client.requestSearch(textField_1.getText());
-	            dispose();
+	        	 String send;
+	        	 if(!nameField.getText().equals("")) {
+	        		 send = nameField.getText();
+	        	 }
+	        	 else {
+	        		 send = idField.getText();
+	        	 }
+	        	
+	             client.requestSearch(send);
+	             dispose();
 	         }
 	    });
 		

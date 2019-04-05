@@ -56,13 +56,14 @@ public class Inventory {
 	 * @param price
 	 * @param SupplierID
 	 */
-	public void addTool(int id, String name, int quantity, double price, int SupplierID) {
-		newItem.setID(id);
-		newItem.setName(name);
-		int newQuantity = newItem.getQuantity() + quantity;
-		newItem.setQuantity(newQuantity);
-		newItem.setPrice(price);
-		newItem.setSupplierID(SupplierID);
+	public void addTool(int id, String name, int quantity, double price, int supplierID) {
+		newItem = new Item(id, name, quantity, price, supplierID);
+//		newItem.setID(id);
+//		newItem.setName(name);
+//		int newQuantity = newItem.getQuantity() + quantity;
+//		newItem.setQuantity(newQuantity);
+//		newItem.setPrice(price);
+//		newItem.setSupplierID(SupplierID);
 		itemList.add(newItem);
 	}
 	

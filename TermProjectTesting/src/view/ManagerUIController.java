@@ -16,6 +16,9 @@ public class ManagerUIController {
 		shopUI = new ShopUI();
 		shopUI.addListener(new OperationListener(), shopUI.listAllButton);
 		shopUI.addListener(new OperationListener(), shopUI.searchButton);
+		shopUI.addListener(new OperationListener(), shopUI.addItem);
+		shopUI.addListener(new OperationListener(), shopUI.addSupplier);
+		shopUI.addListener(new OperationListener(), shopUI.changePrice);
 	}
 	
 	public static void main(String[] args) {
@@ -73,6 +76,15 @@ public class ManagerUIController {
 			case "Search":
 				new SearchWindow(managerClient);
 				break;
+			case "Add Item":
+				new NewItemWindow(managerClient);
+				break;
+			case "Add Supplier":
+				new NewSupplierWindow(managerClient);
+				break;
+			case "Change Price":
+				new ChangePriceWindow(managerClient, (String) shopUI.list.getSelectedValue());
+				break;
 			default :
 				System.out.println("Invalid command");
 			}
@@ -84,9 +96,9 @@ public class ManagerUIController {
 		managerClient.requestSearch(name);
 	}
 	
-	private void placeOrder(String id) {
-		managerClient.requestPlaceOrder(id);
-	}
+//	private void placeOrder(String id) {
+//		managerClient.requestPlaceOrder(id);
+//	}
 	
 	private void createNewSuppler(String id, String name, String address, String contact) {
 		managerClient.createNewSupplier(id, name, address, contact);
@@ -96,8 +108,8 @@ public class ManagerUIController {
 		managerClient.createNewItem(id, name, quantity, price, supplier);
 	}
 	
-	private void changeItemPrice(String price) {
-		managerClient.changeItemPrice(price);
+	private void changeItemPrice(String id, String price) {
+		managerClient.changeItemPrice(id, price);
 	}
 	
 	private void viewOrder() {

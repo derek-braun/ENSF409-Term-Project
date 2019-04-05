@@ -3,6 +3,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.AbstractButton;
 
@@ -15,6 +16,9 @@ public class CustomerUIController {
 		customerUI = new CustomerUI();
 		customerUI.addListener(new OperationListener(), customerUI.searchButton);
 		customerUI.addListener(new OperationListener(), customerUI.listAllButton);
+		customerUI.addListener(new OperationListener(), customerUI.addItem);
+		customerUI.addListener(new OperationListener(), customerUI.removeItem);
+		customerUI.addListener(new OperationListener(), customerUI.order);
 	}
 	
 	public static void main(String[] args) {
@@ -70,6 +74,15 @@ public class CustomerUIController {
 				break;
 			case "Search":
 				new SearchWindow(customerClient);
+				break;
+			case "Add":
+				customerUI.cartList.addElement(customerUI.list.getSelectedValue());
+				break;
+			case "Remove":
+				customerUI.cartList.removeElement(customerUI.list.getSelectedValue());
+				break;
+			case "Order":
+				customerUI.cartList.clear();
 				break;
 			default :
 				System.out.println("Invalid command");
