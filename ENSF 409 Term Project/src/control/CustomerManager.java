@@ -27,8 +27,10 @@ public class CustomerManager extends Manager {
 
 
 	@Override
-	void runManager() {
-		// TODO Auto-generated method stub
+	Runnable runManager() {
+		while(true) {
+			
+		}
 		
 	}
 }

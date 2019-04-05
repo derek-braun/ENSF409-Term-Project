@@ -7,7 +7,7 @@ import java.net.Socket;
 
 import model.*;
 
-abstract class Manager {
+abstract class Manager implements Runnable {
 
 	protected Order order;
 	protected Inventory inventory;
@@ -25,7 +25,7 @@ abstract class Manager {
 		}
 	}
 
-	abstract void runManager();
+	abstract Runnable runManager();
 	
 	public Item search(String name) {
 		return inventory.search(name);
@@ -44,5 +44,8 @@ abstract class Manager {
 		socketOut.flush();
 	}
 	
+	public void run() {
+		runManager();
+	}
 
 }

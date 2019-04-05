@@ -32,12 +32,16 @@ public class Server {
 	public void commuicateWtihClient() throws IOException{
 		try {
 			while(true) {
-				if(serverSocket.getLocalPort() == 1337) {
-					new ShopManager(serverSocket.accept(),inv,sup);
+				//System.out.println("Trying to connect");
+				//System.out.println(serverSocket.getLocalPort());
+				if(serverSocket.getLocalPort() == 8099) {
+					//System.out.println("Waiting for leet user");
+					ShopManager sman = new ShopManager(serverSocket.accept(),inv,sup);
+					pool.execute(sman.runManager());
 				}else {
 					new CustomerManager(serverSocket.accept(),inv);
 				}
-
+				System.out.println("Connected to client");
 
 
 				//pool.execute();
@@ -52,7 +56,7 @@ public class Server {
 		Inventory i = null;
 		i = new Inventory("items.txt");
 		ArrayList<Supplier> s = readSupplier("suppliers.txt");
-		Server server = new Server(1337,i,s);
+		Server server = new Server(8099,i,s);
 		//Server server2 = new Server(3000,i,s);
 		System.out.println("Server is now running");
 		server.commuicateWtihClient();

@@ -31,38 +31,43 @@ public class ShopManager extends Manager {
 	}
 
 	@Override
-	void runManager() {
+	Runnable runManager() {
 		while(true) {
 			String input = null;
+			System.out.println("Running Manager");
 			try {
 				input = socketIn.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println(e.getMessage());
 			}
 			//CHEESE
-			String[] command = input.split("\n");
-			String[] parameters = command[1].split(" ");
+			System.out.println(input);
+			String[] command = input.split(" ");
+			//System.out.println("Command: " + command[0]);
 			if(command[0].equals("CREATE_ITEM")) {
-				int id = Integer.parseInt(parameters[0]); 
-				String name = parameters[1];
-				int quantity = Integer.parseInt(parameters[2]);
-				double price = Double.parseDouble(parameters[3]);
-				int supplierID = Integer.parseInt(parameters[4]);
+				int id = Integer.parseInt(command[1]); 
+				String name = command[2];
+				int quantity = Integer.parseInt(command[3]);
+				double price = Double.parseDouble(command[4]);
+				int supplierID = Integer.parseInt(command[5]);
 				addNewItem(id,name,quantity,price,supplierID);
 				
 			}
-			else if(command[0].equals("CREATE_NEWSUPPLIER")) {
-				int id = Integer.parseInt(parameters[0]);
-				addNewSupplier(id, parameters[1], parameters[2], parameters[3]);
+			else if(command[0].equals("CREATE_SUPPLIER")) {
+				int id = Integer.parseInt(command[1]);
+				addNewSupplier(id, command[2], command[3], command[4]);
 			}else if(command[0].equals("CHANGE_PRICE")) {
-				int id = Integer.parseInt(parameters[0]);
-				double change = Double.parseDouble(parameters[1]);
+				int id = Integer.parseInt(command[1]);
+				double change = Double.parseDouble(command[2]);
 				changePrice(id, change);
-			}else if(command[0].equals("SEARCH")) {
-				int id = Integer.parseInt(parameters[0]);
-				sendString(search(id).toString());
-			}else if(command[0].equals("SEE_ORDER")) {
+			}else if(command[0].equals("SEARCH_ITEM")) {
+				//System.out.println("Entering search");
+				int id = Integer.parseInt(command[1]);
+				String s = search(id).toString();
+				System.out.println(s);
+				sendString(s);
+				//System.out.println("Exiting search");
+			}else if(command[0].equals("MANAGE_ORDER")) {
 				sendString(order.toString());
 			}
 		}
