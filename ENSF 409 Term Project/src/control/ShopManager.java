@@ -32,9 +32,9 @@ public class ShopManager extends Manager {
 
 	@Override
 	Runnable runManager() {
+		System.out.println("Running Manager");
 		while(true) {
 			String input = null;
-			System.out.println("Running Manager");
 			try {
 				input = socketIn.readLine();
 			} catch (IOException e) {

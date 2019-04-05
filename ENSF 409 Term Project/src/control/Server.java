@@ -12,15 +12,14 @@ import java.util.concurrent.Executors;
 
 import model.*;
 
-public class Server {
-	private ServerSocket serverSocket;
-	private Socket aSocket;
-	private ExecutorService pool;
-	private Inventory inv;
-	private ArrayList<Supplier> sup;
-	public Server(int portNum, Inventory i,ArrayList<Supplier> s) {
+abstract class Server implements Runnable{
+	protected ServerSocket serverSocket;
+	protected Socket aSocket;
+	protected ExecutorService pool;
+	protected Inventory inv;
+
+	public Server(int portNum, Inventory i) {
 		inv = i;
-		sup = s;
 		try {
 			serverSocket = new ServerSocket(portNum);
 			pool = Executors.newCachedThreadPool();
@@ -29,41 +28,8 @@ public class Server {
 		}
 	}
 	
-	public void commuicateWtihClient() throws IOException{
-		try {
-			while(true) {
-				//System.out.println("Trying to connect");
-				//System.out.println(serverSocket.getLocalPort());
-				if(serverSocket.getLocalPort() == 8099) {
-					//System.out.println("Waiting for leet user");
-					ShopManager sman = new ShopManager(serverSocket.accept(),inv,sup);
-					pool.execute(sman.runManager());
-				}else {
-					new CustomerManager(serverSocket.accept(),inv);
-				}
-				System.out.println("Connected to client");
-
-
-				//pool.execute();
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			pool.shutdown();
-		}
-	}
-	
-	public static void main(String[] args) throws IOException{
-		Inventory i = null;
-		i = new Inventory("items.txt");
-		ArrayList<Supplier> s = readSupplier("suppliers.txt");
-		Server server = new Server(8099,i,s);
-		//Server server2 = new Server(3000,i,s);
-		System.out.println("Server is now running");
-		server.commuicateWtihClient();
-		//server2.commuicateWtihClient();
+	abstract public void commuicateWtihClient() throws IOException;
 		
-	}
-	
 	public static ArrayList<Supplier> readSupplier(String input){
 		//REPLACE STRING FOR TESTING
 		String fileName = input;
@@ -87,4 +53,27 @@ public class Server {
 		}
 		return theArray;
 	}
+	
+	public void run(){
+		try {
+			commuicateWtihClient();
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) throws IOException{
+		Inventory i = null;
+		i = new Inventory("items.txt");
+		ArrayList<Supplier> s = readSupplier("suppliers.txt");
+		//MultiTreaded server
+		ShopServer server = new ShopServer(8099,i,s);
+		Thread t = new Thread(server);
+		CustomerServer server2 = new CustomerServer(1337,i);
+		Thread t2 = new Thread(server2);
+		t.start();
+		t2.start();
+		System.out.println("Servers are now running");
+	}
+	
 }
